@@ -5,10 +5,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
+    "build": "echo 'Building server-side code' && npm prune --production",
     "dev": "nodemon server.js",
     "seed": "node seed.js",
     "prod": "npm run build && npm run seed && npm run start",
-    "build": "tsc"
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
@@ -18,14 +19,10 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
-    "mongoose": "^8.7.0",
-    "nodemon": "^3.1.7"
+    "mongoose": "^8.7.0"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0",
-    "@types/mongoose": "^5.11.96",
-    "@types/node": "^22.7.4",
-    "typescript": "^5.6.2"
+    "eslint": "^9.12.0",
+    "nodemon": "^3.1.7"
   }
 }
