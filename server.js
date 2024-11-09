@@ -11,15 +11,25 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-MONGODB_URI =
+
+// Use test database URL when in test environment
+const MONGODB_URI =
   "mongodb+srv://ktk2real:krosection999@cluster0.abfalpl.mongodb.net/internshiptest?retryWrites=true&w=majority";
-mongoose
-  .connect(MONGODB_URI)
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+
+if (process.env.NODE_ENV !== "test") {
+  mongoose
+    .connect(MONGODB_URI)
+    .then(() => console.log("Connected to MongoDB"))
+    .catch((err) => console.error("MongoDB connection error:", err));
+}
 
 app.use("/api/songs", songRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Only start the server if we're not in test mode
+if (process.env.NODE_ENV !== "test") {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
+
+module.exports = { app, MONGODB_URI };
